@@ -1,0 +1,8 @@
+{% extends "object.twig" %}
+{% block objectContent %}
+	<p class="thumb">
+		{% for image in images %}
+			<img src="{{image}}" alt="">
+		{% endfor %}
+	</p>
+{% endblock %}
