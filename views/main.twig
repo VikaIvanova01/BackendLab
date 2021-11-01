@@ -1,17 +1,5 @@
-{% extends "layout.twig" %}
 {% block content %}
 
-Вы находитесь на главной странице :)
-<ul class="list-group mt-3">
-    <li class="list-group-item">
-        <a href="/cat" class="btn btn-primary" role="button">Кошечки</a>
-        <a href="/cat/image" class="btn btn-link" role="button">Картинка</a>
-        <a href="/cat/info" class="btn btn-link" role="button">Информация</a>
-      </li>
-    <li class="list-group-item">
-        <a href="/dog" class="btn btn-primary" role="button">Собачки</a>
-        <a href="/dog/image" class="btn btn-link" role="button">Картинка</a>
-        <a href="/dog/info" class="btn btn-link" role="button">Информация</a>
-    </li>
-  </ul>
+{% include "_main.twig" %}
+
 {% endblock %}

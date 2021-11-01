@@ -18,6 +18,7 @@ class TwigBaseController extends BaseController {
             "url" => "/dog",
         ]
     ];
+    
     protected \Twig\Environment $twig; 
     
     public function __construct($twig)
@@ -30,6 +31,7 @@ class TwigBaseController extends BaseController {
         $context = parent::getContext(); 
         $context['title'] = $this->title; 
         $context['menu'] = $this->menu; 
+        $context['url'] = $_SERVER["REQUEST_URI"];
 
         return $context;
     }

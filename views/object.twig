@@ -1,13 +1,15 @@
 {% extends "layout.twig" %}
+{% import "macros.twig" as macros %}
+{% from "macros.twig" import btn %}
 {% block content %}
 
 <ul class="list-group mt-2 list-group-flush">
   <li class="list-group-item mt-1"> 
-      <a class="btn {{ is_image ?  "btn-primary" : "btn-link" }}" href="{{url_image}}">Картинка</a>
-      <a class="btn {{ is_info ?  "btn-primary" : "btn-link" }}" href="{{url_info}}">Информация</a>
-      <p>
+    <a>{{ macros.btn('Картинка', url_image, is_image, "warning") }}</a>
+    <a>{{ macros.btn('Описание', url_info, is_info) }}</a>
   </li>
-  
+</ul>
+
   {% block objectContent %}
   <div class="container" style="font-size: 1em; border: 1px solid silver; text-align: center; margin-right: 10px; margin-left: 10px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
     Выберите, что Вы хотите посмотреть ))

@@ -13,4 +13,13 @@ class DogController extends ObjectController {
     public $url_image = "/dog/image";
     public $url_info = "/dog/info";
 
+    public function getContext() : array
+    {
+        $context = parent::getContext(); // вызываем родительский метод
+        $context['is_image'] = $context['url'] == "/dog/image";
+        $context['is_info'] = $context['url'] == "/dog/info";
+        $context['url_image'] = "/dog/image";
+        $context['url_info'] = "/dog/info";
+        return $context;
+    }
 }
