@@ -1,44 +1,28 @@
 <?php
-require_once "TwigBaseController.php"; 
+require_once "Base_AnimalTwigController.php";
 
-class MainController extends TwigBaseController {
+class MainController extends Base_AnimalTwigController {
     public $template = "main.twig";
     public $title = "Главная";
-    public $menu_cat = [
-        [
-            "title" => "Кошечки",
-            "url" => "/cat",
-        ],
-        [
-            "title" => "Картинка",
-            "url" => "/cat/image",
-        ],
-        [
-            "title" => "Информация",
-            "url" => "/cat/info",
-        ]
-    ];
-    public $menu_dog = [
-        [
-            "title" => "Собачки",
-            "url" => "/dog",
-        ],
-        [
-            "title" => "Картинка",
-            "url" => "/dog/image",
-        ],
-        [
-            "title" => "Информация",
-            "url" => "/dog/info",
-        ]
-    ];
 
-    public function getContext() : array
+    public function getContext(): array
     {
-        $context = parent::getContext(); 
-        $context['menu_cat'] = $this->menu_cat; 
-        $context['menu_dog'] = $this->menu_dog; 
+        $context = parent::getContext();
 
+        $query = $this->pdo->query("SELECT * FROM animals_obj");
+
+        if (isset($_GET['type'])) {
+            $query = $this->pdo->prepare("SELECT * FROM animals_obj WHERE type = :type");
+            $query->bindValue("type", $_GET['type']);
+            $query->execute();
+            $context['title'] = $_GET['type'];
+        } else {
+            $query = $this->pdo->query("SELECT * FROM animals_obj");
+        }
+
+        $context['animals_obj'] = $query->fetchAll();
         return $context;
     }
+
+    
 }

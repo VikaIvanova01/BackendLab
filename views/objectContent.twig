@@ -1,0 +1,16 @@
+{% extends "object.twig" %}
+
+{% block objectContents %}
+{% if show == "image" %}
+<img src='{{ object.image }}' alt="" style="width:50%; object-fit:contain">
+{% elseif show == "info" %}
+{{ object.info }}
+{% else %}
+<div class="container" style="font-weight: bolder;">
+    {{ object.description }}
+</div>
+{% endif %}
+
+
+{% block objectContentChanges %}{% endblock %}
+{% endblock %}

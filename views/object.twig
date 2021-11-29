@@ -1,41 +1,15 @@
 {% extends "layout.twig" %}
 {% import "macros.twig" as macros %}
 {% from "macros.twig" import btn %}
+
 {% block content %}
+<div class="mt-2 list-group-flush">
+	<div class=" mt-1">
+		<a class="nav-link" href="/animals_obj/{{object.id}}"  style="font-weight: bolder; text-align: center; font-size: 2em; color:black">{{ object.title }}</a>
+		<a>{{ macros.btn('Картинка', "/animals_obj/" ~ object.id ~ "/?show=image", chose == "image") }}</a>
+		<a>{{ macros.btn('Описание', "/animals_obj/" ~ object.id ~ "/?show=info", chose == "info") }}</a>
+	</div>
+</div>
 
-<ul class="list-group mt-2 list-group-flush">
-  <li class="list-group-item mt-1"> 
-    <a>{{ macros.btn('Картинка', url_image, is_image, "warning") }}</a>
-    <a>{{ macros.btn('Описание', url_info, is_info) }}</a>
-  </li>
-</ul>
-
-  {% block objectContent %}
-  <div class="container" style="font-size: 1em; border: 1px solid silver; text-align: center; margin-right: 10px; margin-left: 10px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
-    Выберите, что Вы хотите посмотреть ))
-  </div>
-  {% endblock %}
-
- <style>
-    .thumb img  {
-      border: 2px solid grey; 
-      margin-right: 10px; 
-      margin-bottom: 10px;
-      width: 545px; 
-      height: 400px;
-    }
-    .text {
-      font-size: 1em;
-      text-align: left;
-      border: 1px solid silver;
-      padding: auto;
-      margin-right: 10px;
-      margin-left: 10px;
-      padding-right: 10px;
-      padding-left: 10px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
- </style>
-
+{% block objectContents %}{% endblock %}
 {% endblock %}

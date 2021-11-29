@@ -1,8 +1,5 @@
 {% extends "object.twig" %}
-{% block objectContent %}
-	<p class="thumb">
-		{% for image in images %}
-			<img src="{{image}}" alt="">
-		{% endfor %}
-	</p>
+
+{% block _objectContent %}
+    <img src='{{ object.image }}' alt="" style="width:50%; object-fit:contain">
 {% endblock %}

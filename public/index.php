@@ -1,40 +1,30 @@
-<?php 
-
-require_once '../vendor/autoload.php';
+<?php
+require_once "../vendor/autoload.php";
+require_once "../framework/autoload.php";
 require_once "../controllers/MainController.php";
-require_once "../controllers/ObjectController.php";
-require_once "../controllers/CatController.php";
-require_once "../controllers/CatImageController.php";
-require_once "../controllers/CatInfoController.php";
 require_once "../controllers/Controller404.php";
-require_once "../controllers/DogController.php";
-require_once "../controllers/DogImageController.php";
-require_once "../controllers/DogInfoController.php";
+require_once "../controllers/ObjectController.php";
+require_once "../controllers/SearchController.php";
+require_once "../controllers/AnimalObjectCreateController.php";
+require_once "../controllers/AnimalTypeObjectCreateController.php";
+require_once "../controllers/AnimalDeleteController.php";
+require_once "../controllers/AnimalObjectUpdateController.php";
+
 $loader = new \Twig\Loader\FilesystemLoader('../views');
-$twig = new \Twig\Environment($loader);
-$url = $_SERVER["REQUEST_URI"];
+$twig = new \Twig\Environment($loader, [
+    "debug" => true
+]);
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
-$context = [];
-$controller = new Controller404($twig);
+$pdo = new PDO("mysql:host=localhost;dbname=animals;charset=utf8", "root", "");
 
-if ($url == "/") {
-    $controller = new MainController($twig);
-} elseif (preg_match("#^/cat/image#", $url)) { 
-    $controller = new CatImageController($twig);
-} elseif (preg_match("#^/cat/info#", $url)) {
-    $controller = new CatInfoController($twig);
-} elseif (preg_match("#^/cat#", $url)) {
-    $controller = new CatController($twig);
-} elseif (preg_match("#^/dog/image#", $url)) { 
-    $controller = new DogImageController($twig);
-} elseif (preg_match("#^/dog/info#", $url)) {
-    $controller = new DogInfoController($twig);
-} elseif (preg_match("#^/dog#", $url)) {
-    $controller = new DogController($twig);
-}
-
-if ($controller) {
-    $controller->get();
-}
-
-    
+$router = new Router($twig, $pdo);
+$router->add("/", MainController::class);
+$router->add("/animals_obj/(?P<id>\d+)", ObjectController::class);
+$router->add("/animals_obj/(?P<id>\d+)/", ObjectController::class);
+$router->add("/search", SearchController::class);
+$router->add("/animals_obj/create", AnimalObjectCreateController::class);
+$router->add("/animals_obj/create_type", AnimalTypeObjectCreateController::class);
+$router->add("/animals_obj/(?P<id>\d+)/delete", AnimalDeleteController::class);
+$router->add("/animals_obj/(?P<id>\d+)/edit", AnimalObjectUpdateController::class);
+$router->get_or_default(Controller404::class);

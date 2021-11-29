@@ -1,5 +1,13 @@
+{% extends "layout.twig" %}
+
 {% block content %}
-
-{% include "_main.twig" %}
-
+	{% block mainContent %}
+		<div class="container">
+			<div class="row">
+				{% for object in animals_obj %}
+					{% include '_main.twig' %}
+				{% endfor %}
+			</div>
+		</div>
+	{% endblock %}
 {% endblock %}
