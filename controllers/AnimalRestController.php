@@ -30,12 +30,12 @@ class AnimalRestController extends BaseRestController
         $data = json_decode($data, True);
 
         $sql = <<<EOL
-INSERT INTO animals_obj(title, description, type, info, image)
-VALUES(:title, :description, :type, :info, :image_url)
+INSERT INTO animals_obj(title, image, description, info, type)
+VALUES(:title, :image_url, :description, :info, :type)
 EOL;
 
         $query = $this->pdo->prepare($sql);
-        $query->bindValue("id", $this->params['id']);
+        $query->bindValue("id", $data['id']);
         $query->bindValue("type", $this->params['type']);
         $query->bindValue("info", $this->params['info']);
         $query->bindValue("image_url", $this->params['image']);
@@ -54,12 +54,12 @@ EOL;
 
         $sql = <<<EOL
 UPDATE animals_obj
-SET title = :title, description = :description, type = :type, info = :info, image = :image_url
+SET title = :title, image = :image_url, description = :description, info = :info, type = :type
 WHERE id = :id; 
 EOL;
 
         $query = $this->pdo->prepare($sql);
-        $query->bindValue("id", $this->params['id']);
+        $query->bindValue("id", $data['id']);
         $query->bindValue("type", $this->params['type']);
         $query->bindValue("info", $this->params['info']);
         $query->bindValue("image", $this->params['image']);

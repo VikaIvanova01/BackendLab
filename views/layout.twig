@@ -32,7 +32,7 @@
 						</li>
 						{% for type in types %}
 						<li class="nav-item">
-							<a>{{ macros.btn(type.type|title, "/?type=" ~ type.type, title == type.type) }}</a>
+							<a>{{ macros.btn(type.name|title, "/?type=" ~ type.name, title == type.name) }}</a>
 						</li>
 						{% endfor %}
 						<li class="nav-item">

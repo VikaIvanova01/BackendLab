@@ -28,15 +28,14 @@
         <label class="form-label">Тип</label>
         <select class="form-control" name="type">
             {% for type in types %}
-            <option value="{{object.type}}" {% if type.type==object.type %}selected{% endif %}>
-                {{type.type|title}}
+            <option value="{{type.name}}" {% if type.name==object.type %}selected{% endif %}</option>
+                {{type.name|title}}
             </option>
             {% endfor %}
         </select>
     </div>
     <div class="mb-1">
         <label class="form-label">Картинка</label>
-        <i class="fas fa-paperclip" aria-hidden="true"></i>
         <input class="form-control" type="file" name="image">
         {% if object.image %}
         <img src='{{ object.image }}' alt="" style="width:15%; object-fit:contain; padding-top: 5px;">
@@ -48,7 +47,7 @@
     </div>
     <div class="col-12 text-end">
         <button type="submit" class="btn btn-primary">{% if url == "/animals_obj/create" %}Добавить{% else
-            %}Отредактировать{% endif %}</button>
+            %}Редактировать{% endif %}</button>
     </div>
 </form>
 

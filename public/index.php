@@ -9,6 +9,7 @@ require_once "../controllers/AnimalObjectCreateController.php";
 require_once "../controllers/AnimalTypeObjectCreateController.php";
 require_once "../controllers/AnimalDeleteController.php";
 require_once "../controllers/AnimalObjectUpdateController.php";
+require_once "../controllers/AnimalRestController.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
@@ -17,6 +18,7 @@ $twig = new \Twig\Environment($loader, [
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $pdo = new PDO("mysql:host=localhost;dbname=animals;charset=utf8", "root", "");
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
@@ -27,4 +29,5 @@ $router->add("/animals_obj/create", AnimalObjectCreateController::class);
 $router->add("/animals_obj/create_type", AnimalTypeObjectCreateController::class);
 $router->add("/animals_obj/(?P<id>\d+)/delete", AnimalDeleteController::class);
 $router->add("/animals_obj/(?P<id>\d+)/edit", AnimalObjectUpdateController::class);
+$router->add("/api/animals/(?P<id>\d+)?", AnimalRestController::class);
 $router->get_or_default(Controller404::class);

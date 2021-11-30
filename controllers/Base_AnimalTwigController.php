@@ -6,7 +6,7 @@ class Base_AnimalTwigController extends TwigBaseController
     {
         $context = parent::getContext();
 
-        $query = $this->pdo->query("SELECT name type FROM animals_types");
+        $query = $this->pdo->query("SELECT id, name FROM animals_types");
         $types = $query->fetchAll();
         $context['types'] = $types;
 

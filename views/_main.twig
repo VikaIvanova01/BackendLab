@@ -5,20 +5,20 @@
 	<div class="position-absolute" style="right: 4px; top: 4px">
 		<form action="/animals_obj/{{ object.id }}/delete" method="post">
 			<button type="submit" class="btn btn-danger">
-				<i class="fas fa-times"></i>
+				<i class="fas fa-trash-alt"></i>
 			</button>
 		</form>
 	</div>
 	<div class="position-absolute" style="right: 50px; top: 4px">
 		<form action="/animals_obj/{{ object.id }}/edit" method="post">
 			<button type="submit" class="btn btn-info">
-				<i class="fas fa-folder-open"></i>
+				<i class="fas fa-edit"></i>
 			</button>
 		</form>
 	</div>
 	<div class="d-flex"
 		style="justify-content: flex-start; flex-direction: column; align-items: center; border: 1px solid black; height: 100%; padding:5px">
-		<img src='{{ object.image }}' alt="" style="width:100%; height:300px; object-fit:contain">
+		<img src='{{ object.image }}' alt="" style="width:100%; height:150px; object-fit:contain">
 		<br>
 		<a>{{ macros.btn(object.title, "/animals_obj/" ~ object.id, true) }}</a>
 		<li class="list-group-item" style="border: 0px">

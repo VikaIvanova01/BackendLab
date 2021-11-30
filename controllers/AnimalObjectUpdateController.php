@@ -51,13 +51,13 @@ EOL;
             if ($_FILES['image']) {
                 $sql = <<<EOL
 UPDATE animals_obj
-SET title = :title, description = :description, type = :type, info = :info, image = :image_url
+SET title = :title, image = :image_url, description = :description, info = :info, type = :type
 WHERE id = :id;
 EOL;
             } else {
                 $sql = <<<EOL
 UPDATE animals_obj
-SET title = :title, description = :description, type = :type, info = :info
+SET title = :title, description = :description, info = :info, type = :type
 WHERE id = :id;
 EOL;
             }

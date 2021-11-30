@@ -25,8 +25,8 @@ class SearchController extends Base_AnimalTwigController
             EOL;
             $query = $this->pdo->prepare($sql);
             $query->bindValue("title", $title);
-            $query->bindValue("type", $type);
             $query->bindValue("info", $info);
+            $query->bindValue("type", $type);
             $query->execute();
             $context['objects'] = $query->fetchAll();
         }
