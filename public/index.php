@@ -10,6 +10,7 @@ require_once "../controllers/AnimalTypeObjectCreateController.php";
 require_once "../controllers/AnimalDeleteController.php";
 require_once "../controllers/AnimalObjectUpdateController.php";
 require_once "../controllers/AnimalRestController.php";
+require_once "../middlewares/LoginRequiredMiddleware.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
@@ -25,9 +26,13 @@ $router->add("/", MainController::class);
 $router->add("/animals_obj/(?P<id>\d+)", ObjectController::class);
 $router->add("/animals_obj/(?P<id>\d+)/", ObjectController::class);
 $router->add("/search", SearchController::class);
-$router->add("/animals_obj/create", AnimalObjectCreateController::class);
-$router->add("/animals_obj/create_type", AnimalTypeObjectCreateController::class);
-$router->add("/animals_obj/(?P<id>\d+)/delete", AnimalDeleteController::class);
-$router->add("/animals_obj/(?P<id>\d+)/edit", AnimalObjectUpdateController::class);
+$router->add("/animals_obj/create", AnimalObjectCreateController::class)
+        ->middleware(new LoginRequiredMiddleware());
+$router->add("/animals_obj/create_type", AnimalTypeObjectCreateController::class)
+        ->middleware(new LoginRequiredMiddleware());
+$router->add("/animals_obj/(?P<id>\d+)/delete", AnimalDeleteController::class)
+        ->middleware(new LoginRequiredMiddleware());
+$router->add("/animals_obj/(?P<id>\d+)/edit", AnimalObjectUpdateController::class)
+        ->middleware(new LoginRequiredMiddleware());
 $router->add("/api/animals/(?P<id>\d+)?", AnimalRestController::class);
 $router->get_or_default(Controller404::class);
