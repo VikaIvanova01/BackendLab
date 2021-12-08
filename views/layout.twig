@@ -1,60 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"  rel="stylesheet" />
-    {% import "macros.twig" as macros %}
-	{% from "macros.twig" import btn %}
-    <style>
-        a.active {
-            background-color: skyblue;
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <i class="fas fa-paw"></i>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div>
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a>{{ macros.btn("Главная", "/", title == "Главная") }}</a>
-						</li>
-						{% for type in types %}
-						<li class="nav-item">
-							<a>{{ macros.btn(type.name|title, "/?type=" ~ type.name, title == type.name) }}</a>
-						</li>
-						{% endfor %}
-						<li class="nav-item">
-							<a>{{ macros.btn("Поиск", "/search", title == "Поиск") }}</a>
-						</li>
-						<li class="nav-item">
-							<a>{{ macros.btn("Добавление", "/animals_obj/create", title == "Добавление") }}</a>
-						</li>
-						<li class="nav-item">
-							<a>{{ macros.btn("Добавление типа объекта", "/animals_obj/create_type", title == "Добавление типа объекта") }}</a>
-						</li>
-					</ul>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ title }}</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+		{% import "macros.twig" as macros %}
+		{% from "macros.twig" import btn %}
+		<style>
+			a.active {
+				background-color: skyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="/">
+					<i class="fas fa-paw"></i>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<div>
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a>{{ macros.btn("Главная", "/", title == "Главная") }}</a>
+							</li>
+							{% for type in types %}
+								<li class="nav-item">
+									<a>{{ macros.btn(type.name|title, "/?type=" ~ type.name, title == type.name) }}</a>
+								</li>
+							{% endfor %}
+							<li class="nav-item">
+								<a>{{ macros.btn("Поиск", "/search", title == "Поиск") }}</a>
+							</li>
+							<li class="nav-item">
+								<a>{{ macros.btn("Добавление", "/animals_obj/create", title == "Добавление") }}</a>
+							</li>
+							<li class="nav-item">
+								<a>{{ macros.btn("Добавление типа объекта", "/animals_obj/create_type", title == "Добавление типа объекта") }}</a>
+							</li>
+						</ul>
+						<form action="/set-welcome/">
+							<input type="text" name="message" class="form-control mr-2 ml-2">
+						</form> 
+					</div>
 				</div>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-    {% block content %}
-        пустота
-    {% endblock %}
-    </div>
-</body>
-</html>
-</body>
-</html>
+			</div>
+		</nav>
+		<div class="container">
+			История посещения сайта:
+			{% for m in history|reverse %}
+			<div class="list-group-item" >
+				<a href = {{m}} class=""> {{m}} </a> 
+					<br>
+			</div>
+				
+			{% endfor %}
+
+			{% block content %}
+				пустота
+			{% endblock %}
+		</div>
+	</body>
+</html></body></html>

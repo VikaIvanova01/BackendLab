@@ -16,6 +16,7 @@ class TwigBaseController extends BaseController {
         $context = parent::getContext(); 
         $context['title'] = $this->title;  
         $context['url'] = $_SERVER["REQUEST_URI"];
+        $context['history'] = $_SESSION["history"];
 
         return $context;
     }

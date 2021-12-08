@@ -11,6 +11,7 @@ require_once "../controllers/AnimalDeleteController.php";
 require_once "../controllers/AnimalObjectUpdateController.php";
 require_once "../controllers/AnimalRestController.php";
 require_once "../middlewares/LoginRequiredMiddleware.php";
+require_once "../controllers/SetWelcomeController.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
@@ -35,4 +36,5 @@ $router->add("/animals_obj/(?P<id>\d+)/delete", AnimalDeleteController::class)
 $router->add("/animals_obj/(?P<id>\d+)/edit", AnimalObjectUpdateController::class)
         ->middleware(new LoginRequiredMiddleware());
 $router->add("/api/animals/(?P<id>\d+)?", AnimalRestController::class);
+// $router->add("/set-welcome/", SetWelcomeController::class);
 $router->get_or_default(Controller404::class);

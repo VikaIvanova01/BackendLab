@@ -29,6 +29,9 @@ class ObjectController extends Base_AnimalTwigController
         $context['title'] = $data['title'];
         $context['chose'] = $chose;
         $context['object'] = $data;
+        // $context["my_session_message"] = isset($_SESSION['welcome_message']) ? $_SESSION['welcome_message'] : "";
+        // $context["messages"] = isset($_SESSION['messages']) ? $_SESSION['messages'] : "";
+        // $context["history"] = isset($_SESSION['history']) ? $_SESSION['history'] : "";
         return $context;
     }
 }
