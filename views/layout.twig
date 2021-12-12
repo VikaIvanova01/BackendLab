@@ -45,10 +45,13 @@
 								<a>{{ macros.btn("Добавление типа объекта", "/animals_obj/create_type", title == "Добавление типа объекта") }}</a>
 							</li>
 						</ul>
-						<form action="/set-welcome/">
-							<input type="text" name="message" class="form-control mr-2 ml-2">
-						</form> 
 					</div>
+					{# <form action="/set-welcome/">
+						<input type="text" name="message" class="form-control mr-2 ml-2">
+					</form>  #}
+				</div>
+				<div class="row justify-content-end">
+					<a class="navbar-brand col-auto btn btn-primary" href="/logout"> Выйти</a>
 				</div>
 			</div>
 		</nav>
